@@ -94,6 +94,33 @@ public class Mainframe {
         // Set the size of the center panel
         centerPanel.setPreferredSize(new Dimension(frame.getWidth() - 200, 100));
 
+        // Create a panel for the images using BoxLayout
+         JPanel imagePanel = new JPanel();
+         imagePanel.setOpaque(false);
+         BoxLayout boxLayout = new BoxLayout(imagePanel, BoxLayout.X_AXIS);
+         imagePanel.setLayout(boxLayout);
+ 
+         try {
+             // Load the jw.jpg and oh.jpg images
+             Image jwImage = ImageIO.read(new File("jw.jpg"));
+             Image ohImage = ImageIO.read(new File("oh.jpg"));
+ 
+             // Create JLabels to display the images
+             JLabel jwLabel = new JLabel(new ImageIcon(jwImage));
+             JLabel ohLabel = new JLabel(new ImageIcon(ohImage));
+ 
+             // Add the JLabels to the imagePanel with space in between
+             imagePanel.add(Box.createRigidArea(new Dimension(20, 40))); 
+             imagePanel.add(jwLabel);
+             imagePanel.add(Box.createRigidArea(new Dimension(20, 40))); 
+             imagePanel.add(ohLabel);
+         } catch (IOException e) {
+             e.printStackTrace();
+         }
+ 
+         // Add the imagePanel to the centerPanel
+         centerPanel.add(imagePanel);
+
         // Add a logo image to the left side of the header panel
         try {
             Image logoImage = ImageIO.read(new File("Logo.png.png")); // Replace with the actual file path
