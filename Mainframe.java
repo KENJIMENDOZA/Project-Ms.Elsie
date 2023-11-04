@@ -22,8 +22,6 @@ public class Mainframe {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1100, 943);
         frame.setResizable(false);
-
-        // Set the background color of the content pane to dark gray
         frame.getContentPane().setBackground(Color.DARK_GRAY);
 
         // Create a custom header panel with a background image
@@ -94,32 +92,146 @@ public class Mainframe {
         // Set the size of the center panel
         centerPanel.setPreferredSize(new Dimension(frame.getWidth() - 200, 100));
 
-        // Create a panel for the images using BoxLayout
-         JPanel imagePanel = new JPanel();
-         imagePanel.setOpaque(false);
-         BoxLayout boxLayout = new BoxLayout(imagePanel, BoxLayout.X_AXIS);
-         imagePanel.setLayout(boxLayout);
- 
-         try {
-             // Load the jw.jpg and oh.jpg images
-             Image jwImage = ImageIO.read(new File("jw.jpg"));
-             Image ohImage = ImageIO.read(new File("oh.jpg"));
- 
-             // Create JLabels to display the images
-             JLabel jwLabel = new JLabel(new ImageIcon(jwImage));
-             JLabel ohLabel = new JLabel(new ImageIcon(ohImage));
- 
-             // Add the JLabels to the imagePanel with space in between
-             imagePanel.add(Box.createRigidArea(new Dimension(20, 40))); 
-             imagePanel.add(jwLabel);
-             imagePanel.add(Box.createRigidArea(new Dimension(20, 40))); 
-             imagePanel.add(ohLabel);
-         } catch (IOException e) {
-             e.printStackTrace();
-         }
- 
-         // Add the imagePanel to the centerPanel
-         centerPanel.add(imagePanel);
+        // Create buttons for the images with additional info
+JButton jwButton = createImageButton("jw.jpg", "John Wick Chapter 4");
+JButton ohButton = createImageButton("oh.jpg", "Oppenheimer");
+
+// Create a "Buy Ticket" button
+BubbleButton buyTicketButton = new BubbleButton("Buy Ticket");
+
+
+  // Set the same button style as other buttons (you can create a separate method for this)
+        buyTicketButton.setFont(new Font("Sans-serif", Font.BOLD, 16));
+        buyTicketButton.setForeground(Color.BLACK);
+        buyTicketButton.setBackground(null);
+        buyTicketButton.setFocusPainted(false);
+        buyTicketButton.setFocusable(false);
+        buyTicketButton.setBorderPainted(false);
+        buyTicketButton.setPreferredSize(new Dimension(150, 38));
+        buyTicketButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                buyTicketButton.setBackground(new Color(255, 215, 0));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                buyTicketButton.setBackground(null);
+            }
+        });
+
+        // Add an action listener for the "Logout" button
+        buyTicketButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            
+            }
+        });
+
+        // Create a "Buy Ticket" button
+BubbleButton buyTicketButton1 = new BubbleButton("Buy Ticket");
+
+
+  // Set the same button style as other buttons (you can create a separate method for this)
+        buyTicketButton1.setFont(new Font("Sans-serif", Font.BOLD, 16));
+        buyTicketButton1.setForeground(Color.BLACK);
+        buyTicketButton1.setBackground(null);
+        buyTicketButton1.setFocusPainted(false);
+        buyTicketButton1.setFocusable(false);
+        buyTicketButton1.setBorderPainted(false);
+        buyTicketButton1.setPreferredSize(new Dimension(150, 38));
+        buyTicketButton1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                buyTicketButton1.setBackground(new Color(255, 215, 0));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                buyTicketButton1.setBackground(null);
+            }
+        });
+
+        // Add an action listener for the "Logout" button
+        buyTicketButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            
+            }
+        });
+        
+
+    // Create a panel for the images using GridBagLayout to center them
+    JPanel imagePanel = new JPanel(new GridBagLayout());
+    imagePanel.setOpaque(false);
+
+    // Add the image buttons to the imagePanel
+    GridBagConstraints gbc = new GridBagConstraints();
+    gbc.gridx = 0;
+    gbc.gridy = 0;
+    gbc.insets = new Insets(30, 50, 0, 50);
+    imagePanel.add(jwButton, gbc);
+
+    gbc.gridx = 1;
+    imagePanel.add(ohButton, gbc);
+
+    // Add the imagePanel to the centerPanel
+    centerPanel.add(imagePanel);
+
+    // Add a mouse listener for hover effect (optional)
+    buyTicketButton.addMouseListener(new MouseAdapter() {
+    private Component bubbleButton;
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        // Customize the button's appearance on hover
+        buyTicketButton.setForeground(Color.BLACK);
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+    }
+});
+
+// Add the "Buy Ticket" button to the centerPanel
+centerPanel.add(buyTicketButton);
+centerPanel.add(buyTicketButton1);
+
+// Create a panel for the "jw.jpg" image and its "Buy Ticket" button
+JPanel jwImagePanel = new JPanel(new GridBagLayout());
+jwImagePanel.setOpaque(false);
+
+// Add the "jw.jpg" image button to the panel
+gbc.gridx = 0;
+gbc.gridy = 0;
+gbc.insets = new Insets(30, 50, 10, 50);
+jwImagePanel.add(jwButton, gbc);
+
+// Add the "Buy Ticket" button to the panel
+gbc.gridy = 1;
+gbc.insets = new Insets(0, 50, 30, 50);
+jwImagePanel.add(buyTicketButton, gbc);
+
+// Add the "jw.jpg" image panel to the centerPanel
+centerPanel.add(jwImagePanel);
+
+// Create a panel for the "oh.jpg" image and its "Buy Ticket" button
+JPanel ohImagePanel = new JPanel(new GridBagLayout());
+ohImagePanel.setOpaque(false);
+
+// Add the "oh.jpg" image button to the panel
+gbc.gridx = 0;
+gbc.gridy = 0;
+gbc.insets = new Insets(30, 50, 10, 50);
+ohImagePanel.add(ohButton, gbc);
+
+// Add the "Buy Ticket" button to the panel
+gbc.gridy = 1;
+gbc.insets = new Insets(0, 50, 30, 50);
+ohImagePanel.add(buyTicketButton1, gbc);
+
+// Add the "oh.jpg" image panel to the centerPanel
+centerPanel.add(ohImagePanel);
 
         // Add a logo image to the left side of the header panel
         try {
@@ -141,7 +253,6 @@ public class Mainframe {
         BubbleButton homeButton = new BubbleButton("Home");
         BubbleButton receiptButton = new BubbleButton("Check Receipts");
         BubbleButton checkoutButton = new BubbleButton("Check Out");
-        
 
         // Create a "Logout" button with the logout.png image
         JButton logoutButton = new JButton();
@@ -152,23 +263,24 @@ public class Mainframe {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         // Set the same button style as other buttons (you can create a separate method for this)
         logoutButton.setFont(new Font("Sans-serif", Font.BOLD, 16));
         logoutButton.setForeground(Color.BLACK);
-        logoutButton.setBackground(null); // No button background
+        logoutButton.setBackground(null);
         logoutButton.setFocusPainted(false);
         logoutButton.setFocusable(false);
         logoutButton.setBorderPainted(false);
-        logoutButton.setPreferredSize(new Dimension(150, 40)); // Adjust the button size
+        logoutButton.setPreferredSize(new Dimension(150, 40));
         logoutButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                logoutButton.setBackground(new Color(255, 215, 0)); // Change background color on hover
+                logoutButton.setBackground(new Color(255, 215, 0));
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                logoutButton.setBackground(null); // No background color when not hovering
+                logoutButton.setBackground(null);
             }
         });
 
@@ -190,17 +302,51 @@ public class Mainframe {
 
         // Add buttons to leftPanel using BoxLayout
         leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
-        leftPanel.add(Box.createRigidArea(new Dimension(0, 20))); // Add space
+        leftPanel.add(Box.createRigidArea(new Dimension(0, 20)));
         leftPanel.add(homeButton);
-        leftPanel.add(Box.createRigidArea(new Dimension(0, 40))); // Add space
+        leftPanel.add(Box.createRigidArea(new Dimension(0, 40)));
         leftPanel.add(receiptButton);
-        leftPanel.add(Box.createRigidArea(new Dimension(0, 40))); // Add space
+        leftPanel.add(Box.createRigidArea(new Dimension(0, 40)));
         leftPanel.add(checkoutButton);
 
         // Add the "Logout" button to the bottom of the left panel
-        leftPanel.add(Box.createRigidArea(new Dimension(0, 350))); // Add space
+        leftPanel.add(Box.createRigidArea(new Dimension(0, 350)));
         leftPanel.add(logoutButton);
 
         frame.setVisible(true);
+    }
+
+    // Create a method to generate image buttons with additional info and hover effect
+    private static JButton createImageButton(String imagePath, String info) {
+        JButton imageButton = new JButton();
+
+        try {
+            Image image = ImageIO.read(new File(imagePath));
+            ImageIcon icon = new ImageIcon(image);
+            imageButton.setIcon(icon);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Customize the image button
+        imageButton.setPreferredSize(new Dimension(200, 200));
+        imageButton.setBorderPainted(false);
+        imageButton.setFocusPainted(false);
+        imageButton.setContentAreaFilled(false);
+
+        // Add a mouse listener for hover effect
+        imageButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                imageButton.setToolTipText(info);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                imageButton.setToolTipText(null);
+            }
+        });
+
+        return imageButton;
     }
 }
